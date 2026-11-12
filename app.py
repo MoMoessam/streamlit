@@ -3,37 +3,14 @@ from pathlib import Path
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from utils.data import load_data
+from utils.config import COLORS, ORDERS
 
 st.set_page_config(page_title="Titanic Explorer", page_icon="🚢", layout="wide")
 
-# Change to Path(__file__).parent / "src" / "titanic.csv" if the app sits outside src/
-DATA_PATH = 'data/titanic (1).csv'
-
-ORDERS = {
-    "class": ["First", "Second", "Third"],
-    "survival": ["Died", "Survived"],
-    "age_group": ["child", "teen", "young adult", "adult", "senior"],
-}
-COLORS = {"Died": "#D95D4A", "Survived": "#0F766E"}
 
 
-@st.cache_data
-def load_data(path) -> pd.DataFrame:
-    df = pd.read_csv(path)
-    df.columns = df.columns.str.lower()
-    df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
-    df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
-    df["port"] = df["embarked"].map({"C": "Cherbourg", "Q": "Queenstown", "S": "Southampton"})
-    df["family_size"] = df["sibsp"] + df["parch"] + 1
-    df["title"] = df["name"].str.extract(r",\s*([^\.]+)\.", expand=False)
-    df["age_group"] = pd.cut(
-        df["age"], [0, 12, 18, 35, 60, 80],
-        labels=ORDERS["age_group"],
-    )
-    return df
-
-
-full_df = load_data(DATA_PATH)
+full_df = load_data()
 
 # ---------------- Sidebar filters ----------------
 st.sidebar.header("Filters")
