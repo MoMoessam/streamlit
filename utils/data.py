@@ -1,7 +1,7 @@
 import pandas as pd
 from utils.config import ORDERS
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv("/Users/KingSlasher3000/iti/streamlit_project/titanic_app/data/titanic (1).csv")
+    df = pd.read_csv("../data/titanic (1).csv")
     df.columns = df.columns.str.lower()
     df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
     df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
