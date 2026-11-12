@@ -53,6 +53,8 @@ df = full_df[
 st.title("🚢 Interactive Titanic")
 st.caption("Plotly charts from the Session 7 lab, shown in Streamlit")
 
+st.image("utils/10294_Prod.png")
+
 c1, c2, c3 = st.columns(3)
 c1.metric("Passengers", len(df))
 c2.metric("Survival rate", f"{df['survived'].mean():.1%}" if len(df) else "n/a")
