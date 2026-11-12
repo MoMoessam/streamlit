@@ -8,8 +8,6 @@ from utils.config import COLORS, ORDERS
 
 st.set_page_config(page_title="Titanic Explorer", page_icon="🚢", layout="wide")
 
-
-
 full_df = load_data()
 
 # ---------------- Sidebar filters ----------------

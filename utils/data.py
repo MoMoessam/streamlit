@@ -1,7 +1,13 @@
 import pandas as pd
 from utils.config import ORDERS
+from pathlib import Path
+
+
+DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "titanic (1).csv"
+
+
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv("../data/titanic (1).csv")
+    df = pd.read_csv(DATA_PATH)
     df.columns = df.columns.str.lower()
     df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
     df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
